@@ -2,6 +2,7 @@ package vici.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -100,6 +102,8 @@ public class HomeScreen extends Activity implements GetTextFromVoiceCallback,Rec
 					Toast.makeText(HomeScreen.this, "Say the following commands after tapping the speak button\nto activate the features", Toast.LENGTH_LONG).show();
 					Toast.makeText(HomeScreen.this, "Contacts\n\nMusic\n\nDiary\n\nSilent\n\nNormal\n\n", Toast.LENGTH_LONG).show();
 					Toast.makeText(HomeScreen.this, "Now press the mic below to get started", Toast.LENGTH_LONG).show();
+
+					open();
 				}
 			});
 	        
@@ -334,6 +338,32 @@ public class HomeScreen extends Activity implements GetTextFromVoiceCallback,Rec
 		}
 
 		return message;
+	}
+
+	public void open(){
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder.setMessage("Project Developed by\n" +
+				"Sunder\n" +
+				"Umair\n" +
+				"varsha\n" +
+				"amruta");
+
+//		alertDialogBuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+//			@Override
+//			public void onClick(DialogInterface arg0, int arg1) {
+//				Toast.makeText(HomeScreen.this,"You clicked yes button",Toast.LENGTH_LONG).show();
+//			}
+//		});
+//
+//		alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+//			@Override
+//			public void onClick(DialogInterface dialog, int which) {
+//				finish();
+//			}
+//		});
+
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		alertDialog.show();
 	}
 
 }

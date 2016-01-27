@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="visualizerView"><attr format="integer" name="numColumns"/><attr format="color" name="renderColor"/><attr name="renderRange"><enum name="top" value="0"/><enum name="bottom" value="1"/><enum name="both" value="2"/></attr><attr name="renderType"><flag name="bar" value="0x1"/><flag name="pixel" value="0x2"/><flag name="fade" value="0x4"/></attr></declare-styleable>
+    <!-- From: file:/Users/a12116/git/personal/voice-recording-visualizer/visualizer/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="spacing_large">16dp</dimen>
+    <dimen name="spacing_medium">8dp</dimen>
+    <dimen name="spacing_small">4dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+    <dimen name="spacing_xsmall">2dp</dimen>
+</resources>

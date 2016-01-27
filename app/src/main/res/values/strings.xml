@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Voice Input Command Interpreter</string>
+    <string name="app_name">VICI ver 1.0</string>
+    <string name="voi">V.I.C.I</string>
+    <string name="spe">speak</string>
+    <string name="speech_prompt">Say something&#8230;</string>
+    <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
+    <string name="tap_on_mic">Tap on mic to speak</string>
+</resources>

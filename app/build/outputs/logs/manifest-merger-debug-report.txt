@@ -1,0 +1,174 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:2:1-133:12
+	package
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:3:5-21
+		INJECTED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml
+	android:versionName
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:5:5-30
+		INJECTED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml
+	android:versionCode
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:4:5-28
+		INJECTED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:2:11-69
+uses-sdk
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:6:5-43
+MERGED from [com.android.support:appcompat-v7:23.1.1] /Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.1.1] /Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:20:5-43
+MERGED from [com.skyfishjy.ripplebackground:library:1.0.1] /Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.skyfishjy.ripplebackground/library/1.0.1/AndroidManifest.xml:7:5-9:41
+	android:targetSdkVersion
+		INJECTED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:6:15-40
+		INJECTED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.READ_CONTACTS
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:7:1-68
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:7:18-65
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:8:1-77
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:8:18-74
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:9:5-71
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:9:22-68
+application
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:11:5-131:19
+MERGED from [com.android.support:appcompat-v7:23.1.1] /Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.1.1] /Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/AndroidManifest.xml:22:5-20
+MERGED from [com.skyfishjy.ripplebackground:library:1.0.1] /Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.skyfishjy.ripplebackground/library/1.0.1/AndroidManifest.xml:11:5-20
+	android:label
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:14:9-41
+	android:icon
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:12:9-45
+	android:theme
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:13:9-59
+activity#vici.ui.SplashScreen
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:15:9-23:20
+	android:label
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:16:13-45
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:17:13-48
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:18:13-22:29
+action#android.intent.action.MAIN
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:19:18-70
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:19:26-67
+category#android.intent.category.LAUNCHER
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:21:17-77
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:21:27-74
+activity#vici.ui.HomeScreen
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:25:9-34:20
+	android:label
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:26:13-45
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:27:13-46
+intent-filter#Intro.class+android.intent.category.DEFAULT
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:28:13-33:29
+action#Intro.class
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:29:18-55
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:29:26-52
+category#android.intent.category.DEFAULT
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:30:19-78
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:30:29-75
+activity#vici.speechResolver.Speaker
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:35:9-44:20
+	android:label
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:36:13-45
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:37:13-55
+intent-filter#Speaker.class+android.intent.category.DEFAULT
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:38:13-43:29
+action#Speaker.class
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:39:18-57
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:39:26-54
+activity#vici.ui.ContactActivity
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:46:16-53:35
+	android:label
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:47:13-45
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:48:13-51
+intent-filter#Contact.class+android.intent.category.DEFAULT
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:49:13-52:37
+action#Contact.class
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:50:18-57
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:50:26-54
+activity#vici.ui.Vtt
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:55:16-64:20
+	android:label
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:56:13-45
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:57:13-39
+intent-filter#Vtt.class+android.intent.category.DEFAULT
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:58:13-63:29
+action#Vtt.class
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:59:18-53
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:59:26-50
+activity#vici.ui.MusicActivity
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:66:18-75:20
+	android:label
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:67:13-45
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:68:13-49
+intent-filter#Music.class+android.intent.category.DEFAULT
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:69:13-74:29
+action#Music.class
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:70:18-55
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:70:26-52
+activity#vici.speechResolver.GetTextFromVoice
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:77:19-86:20
+	android:label
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:78:13-45
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:79:13-64
+intent-filter#Vtt1.class+android.intent.category.DEFAULT
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:80:13-85:29
+action#Vtt1.class
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:81:18-54
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:81:26-51
+activity#vici.ui.Vttlevel2
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:89:19-98:20
+	android:label
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:90:13-45
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:91:13-45
+intent-filter#Vttlevel2.class+android.intent.category.DEFAULT
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:92:13-97:29
+action#Vttlevel2.class
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:93:18-59
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:93:26-56
+activity#vici.ui.Vttmusic
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:100:22-109:20
+	android:label
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:101:13-45
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:102:13-44
+intent-filter#Vttmusic.class+android.intent.category.DEFAULT
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:103:13-108:29
+action#Vttmusic.class
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:104:18-58
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:104:26-55
+activity#vici.ui.DiaryActivity
+ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:112:13-121:24
+	android:label
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:113:17-49
+	android:name
+		ADDED from /Users/sunders/Documents/project contacts/android/vici/app/src/main/AndroidManifest.xml:114:17-53

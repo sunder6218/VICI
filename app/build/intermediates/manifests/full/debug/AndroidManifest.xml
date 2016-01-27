@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="in.eyvai.vici"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="23" />
+
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.AppCompat.NoActionBar" >
+        <activity
+            android:name="vici.ui.SplashScreen"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="vici.ui.HomeScreen"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="Intro.class" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="vici.speechResolver.Speaker"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="Speaker.class" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="vici.ui.ContactActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="Contact.class" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="vici.ui.Vtt"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="Vtt.class" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="vici.ui.MusicActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="Music.class" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="vici.speechResolver.GetTextFromVoice"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="Vtt1.class" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="vici.ui.Vttlevel2"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="Vttlevel2.class" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="vici.ui.Vttmusic"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="Vttmusic.class" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="vici.ui.DiaryActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="Vttmusic.class" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- <activity android:name=".main"></activity> -->
+        <!-- <activity android:name=".main1"></activity> -->
+        <!-- <activity android:name=".diary1"></activity> -->
+        <!-- <activity android:name=".intro"></activity> -->
+        <!-- <activity android:name=".contacts"></activity> -->
+        <!-- <activity android:name=".Vtt"></activity> -->
+        <!-- <activity android:name=".Music"></activity> -->
+
+    </application>
+
+</manifest>

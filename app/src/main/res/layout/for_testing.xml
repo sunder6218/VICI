@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/vecto"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="414dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hello" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:src="@drawable/line" />
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="tap icon below for Instructions"/>
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:src="@drawable/line" />
+
+
+            <ImageView
+                android:id="@+id/inst"
+                android:layout_width="81dp"
+                android:layout_height="81dp"
+                android:layout_gravity="center"
+                android:src="@drawable/aaa" />
+
+
+            <TextView
+                android:id="@+id/ticon"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:text="" />
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:src="@drawable/line" />
+
+            <TextView
+                android:id="@+id/ticon"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="Tap on the icon to proceed" />
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:src="@drawable/line" />
+
+
+
+            <!-- <ImageButton
+              android:id="@+id/imageView2"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:src="@drawable/aaa"/>
+             -->
+
+            <ListView
+                android:id="@+id/list1"
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_weight="6.10" />
+
+
+            <ImageView
+                android:id="@+id/talk"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_weight="0.93"
+                android:src="@drawable/go" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

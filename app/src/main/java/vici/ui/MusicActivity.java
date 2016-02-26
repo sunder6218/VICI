@@ -2,8 +2,10 @@ package vici.ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.Cursor;
 import android.media.MediaPlayer;
@@ -25,13 +27,12 @@ import com.ui.R;
 
 import vici.interfaces.GetTextFromVoiceCallback;
 
-public class MusicActivity extends Activity implements GetTextFromVoiceCallback,RecognitionListener{
+public class MusicActivity extends Activity {
 
+	private static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
 	private MediaPlayer mMediaPlayer;
 	private String[] mMusicList;
 	private String[] pathlist;
-	private SpeechRecognizer speech = null;
-	private Intent recognizerIntent;
 	private String LOG_TAG= MusicActivity.class.getSimpleName();
 	static int index=0;
 	int confirm=1;
@@ -48,29 +49,21 @@ public void onCreate(Bundle savedInstanceState) {
 
   mMediaPlayer = new MediaPlayer();
 	mListView = (ListView) findViewById(R.id.PhoneMusicList);
- getTextFromVoiceCallback=this;
 
   mMusicList = getMusic();
   pathlist=getpath();
   ImageView talkbutton= (ImageView)findViewById(R.id.talk);
 
-	speech = SpeechRecognizer.createSpeechRecognizer(this);
-	speech.setRecognitionListener(this);
-	recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-	recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE,
-			"en");
-	recognizerIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,
-			this.getPackageName());
-	recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-			RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
-	recognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3);
 
+	ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this,
+			android.R.layout.simple_list_item_1, mMusicList);
+	mListView.setAdapter(mAdapter);
 
   talkbutton.setOnClickListener(new OnClickListener() {
 	  public void onClick(View v) {
 		  mMediaPlayer.stop();
 
-		  speech.startListening(recognizerIntent);
+		  promptSpeechInput();
 
 	  }
   });
@@ -78,6 +71,24 @@ public void onCreate(Bundle savedInstanceState) {
  
 
 }
+
+
+	private void promptSpeechInput() {
+		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+				RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+		intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+				getString(R.string.speech_prompt));
+		try {
+			startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
+		} catch (ActivityNotFoundException a) {
+			Toast.makeText(getApplicationContext(),
+					getString(R.string.speech_not_supported),
+					Toast.LENGTH_SHORT).show();
+		}
+	}
+
 @Override
 public boolean onKeyDown(int keyCode, KeyEvent event) {
     if ((keyCode == KeyEvent.KEYCODE_BACK)) {
@@ -200,188 +211,99 @@ IllegalStateException, IOException {
 
 
 
+
+
+	/**
+	 * Receiving speech input
+	 * */
 	@Override
-	public void onTextReceived(String resultText) {
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 
-	}
+		switch (requestCode) {
+			case VOICE_RECOGNITION_REQUEST_CODE: {
+				if (resultCode == RESULT_OK && null != data) {
+
+					ArrayList<String> result = data
+							.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+					///start receiver
+					String resultText = result.get(0);
+
+					if (resultText.equals("play") || resultText.equals("start")) {
+						try {
+							playSong(pathlist[temp]);
+						} catch (IllegalArgumentException e) {
+							e.printStackTrace();
+						} catch (IllegalStateException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+
+					}
+
+					if (resultText.equals("stop")) {
+						mMediaPlayer.stop();
+					}
+
+					if (resultText.equals("previous")) {
+						if (index == 0) {
+							try {
+								playSong(pathlist[index]);
+							} catch (IllegalArgumentException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IllegalStateException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+						} else {
+							try {
+								playSong(pathlist[index = index - 1]);
+							} catch (IllegalArgumentException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IllegalStateException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					}
+
+					if (resultText.equals("next")) {
+
+						try {
+							playSong(pathlist[index = index + 1]);
+						} catch (IllegalArgumentException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IllegalStateException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
 
 
-	@Override
-	public void onBeginningOfSpeech() {
-		Log.i(LOG_TAG, "onBeginningOfSpeech");
-		//progressBar.setIndeterminate(false);
-		//progressBar.setMax(10);
-	}
 
-	@Override
-	public void onBufferReceived(byte[] buffer) {
-		Log.i(LOG_TAG, "onBufferReceived: " + buffer);
-	}
-
-	@Override
-	public void onEndOfSpeech() {
-		Log.i(LOG_TAG, "onEndOfSpeech");
-
-		// progressBar.setIndeterminate(true);
-		// toggleButton.setChecked(false);
-	}
-
-	@Override
-	public void onError(int errorCode) {
-		String errorMessage = getErrorText(errorCode);
-		Log.d(LOG_TAG, "FAILED " + errorMessage);
-
-		speech.stopListening();
-		// returnedText.setText(errorMessage);
-		// toggleButton.setChecked(false);
-	}
-
-	@Override
-	public void onEvent(int arg0, Bundle arg1) {
-		Log.i(LOG_TAG, "onEvent");
-	}
-
-	@Override
-	public void onPartialResults(Bundle arg0) {
-		Log.i(LOG_TAG, "onPartialResults");
-
-		speech.stopListening();
-	}
-
-	@Override
-	public void onReadyForSpeech(Bundle arg0) {
-		Log.i(LOG_TAG, "onReadyForSpeech");
-	}
-
-	@Override
-	public void onResults(Bundle results) {
-		Log.i(LOG_TAG, "onResults");
-		ArrayList<String> matches = results
-				.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-		String resultText = matches.get(0);
-//
-
-		if(resultText.equals("play")||resultText.equals("start"))
-		{
-			try {
-				playSong(pathlist[temp]);
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-		}
-
-		if(resultText.equals("stop"))
-		{
-			mMediaPlayer.stop();
-		}
-
-		if(resultText.equals("previous"))
-		{
-			if(index==0)
-			{
-				try {
-					playSong(pathlist[index]);
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-			else{
-				try {
-					playSong(pathlist[index=index-1]);
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 			}
-		}
+			break;
 
-		if(resultText.equals("next"))
-		{
-
-			try {
-				playSong(pathlist[index=index+1]);
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-
-
-
-		ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, mMusicList);
-		mListView.setAdapter(mAdapter);
-	}
-
-	@Override
-	public void onRmsChanged(float rmsdB) {
-		Log.v(LOG_TAG, "onRmsChanged: " + rmsdB);
-		//mVisualizerView.updateVisualizer(ByteBuffer.allocate(4).putFloat(rmsdB).array());
-		//progressBar.setProgress((int) rmsdB);
-	}
-
-	public static String getErrorText(int errorCode) {
-		String message;
-		switch (errorCode) {
-			case SpeechRecognizer.ERROR_AUDIO:
-				message = "Audio recording error";
-				break;
-			case SpeechRecognizer.ERROR_CLIENT:
-				message = "Client side error";
-				break;
-			case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
-				message = "Insufficient permissions";
-				break;
-			case SpeechRecognizer.ERROR_NETWORK:
-				message = "Network error";
-				break;
-			case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
-				message = "Network timeout";
-				break;
-			case SpeechRecognizer.ERROR_NO_MATCH:
-				message = "No match";
-				break;
-			case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
-				message = "RecognitionService busy";
-				break;
-			case SpeechRecognizer.ERROR_SERVER:
-				message = "error from server";
-				break;
-			case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
-				message = "No speech input";
-				break;
 			default:
-				message = "Didn't understand, please try again.";
 				break;
 		}
 
-		return message;
 	}
 }
 

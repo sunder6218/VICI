@@ -4,10 +4,6 @@
         "source": "/Users/sunders/Documents/project contacts/android/vici/app/src/main/res/drawable-ldpi/logo.jpg"
     },
     {
-        "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/talk.png",
-        "source": "/Users/sunders/Documents/project contacts/android/vici/app/src/main/res/drawable-ldpi/talk.png"
-    },
-    {
         "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/aaa.png",
         "source": "/Users/sunders/Documents/project contacts/android/vici/app/src/main/res/drawable-ldpi/aaa.png"
     },
@@ -18,10 +14,6 @@
     {
         "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/vecto.jpg",
         "source": "/Users/sunders/Documents/project contacts/android/vici/app/src/main/res/drawable-ldpi/vecto.jpg"
-    },
-    {
-        "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/go.png",
-        "source": "/Users/sunders/Documents/project contacts/android/vici/app/src/main/res/drawable-ldpi/go.png"
     },
     {
         "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/drawable-ldpi-v4/line.jpg",

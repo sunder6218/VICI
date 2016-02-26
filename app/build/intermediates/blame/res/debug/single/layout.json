@@ -1,31 +1,31 @@
 [
     {
-        "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_item_layout.xml",
-        "source": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_popup_menu_item_layout.xml"
-    },
-    {
         "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/layout/abc_screen_content_include.xml",
         "source": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_screen_content_include.xml"
     },
     {
-        "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/layout/notification_template_big_media_narrow.xml",
-        "source": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_template_big_media_narrow.xml"
+        "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_item_layout.xml",
+        "source": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_popup_menu_item_layout.xml"
     },
     {
         "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
         "source": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_select_dialog_material.xml"
     },
     {
+        "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/layout/notification_template_big_media_narrow.xml",
+        "source": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_template_big_media_narrow.xml"
+    },
+    {
         "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/layout/diary1.xml",
         "source": "/Users/sunders/Documents/project contacts/android/vici/app/src/main/res/layout/diary1.xml"
     },
     {
-        "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
-        "source": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_list_menu_item_icon.xml"
-    },
-    {
         "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/layout/select_dialog_multichoice_material.xml",
         "source": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
+        "source": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_list_menu_item_icon.xml"
     },
     {
         "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
@@ -70,10 +70,6 @@
     {
         "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/layout/abc_screen_simple.xml",
         "source": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_screen_simple.xml"
-    },
-    {
-        "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/layout/for_testing.xml",
-        "source": "/Users/sunders/Documents/project contacts/android/vici/app/src/main/res/layout/for_testing.xml"
     },
     {
         "merged": "/Users/sunders/Documents/project contacts/android/vici/app/build/intermediates/res/merged/debug/layout/music.xml",

@@ -1,6 +1,7 @@
 package vici.ui;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,7 +24,6 @@ import com.skyfishjy.library.RippleBackground;
 import com.ui.R;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,11 +33,10 @@ import vici.interfaces.GetTextFromVoiceCallback;
 
 
 
-public class HomeScreen extends Activity implements GetTextFromVoiceCallback,RecognitionListener {
+public class HomeScreen extends Activity implements GetTextFromVoiceCallback {
 
 
-	private SpeechRecognizer speech = null;
-	private Intent recognizerIntent;
+	private static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
 	private RippleBackground rippleBackground;
 	private String LOG_TAG= HomeScreen.class.getSimpleName();
 	private ImageView btn,instructions;
@@ -71,16 +70,7 @@ public class HomeScreen extends Activity implements GetTextFromVoiceCallback,Rec
 					}
 				}
 			});
-			speech = SpeechRecognizer.createSpeechRecognizer(this);
-			speech.setRecognitionListener(this);
-			recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-			recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE,
-					"en");
-			recognizerIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,
-					this.getPackageName());
-			recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-					RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
-			recognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3);
+
 
 
 
@@ -91,7 +81,8 @@ public class HomeScreen extends Activity implements GetTextFromVoiceCallback,Rec
 				public void onClick(View view) {
 					rippleBackground.setVisibility(View.VISIBLE);
 					rippleBackground.startRippleAnimation();
-					speech.startListening(recognizerIntent);
+					promptSpeechInput();
+
 				}
 			});
 
@@ -128,217 +119,160 @@ public class HomeScreen extends Activity implements GetTextFromVoiceCallback,Rec
 	@Override
 	protected void onPause() {
 		super.onPause();
-		if (speech != null) {
-			speech.destroy();
+
 			rippleBackground.setVisibility(View.INVISIBLE);
 			rippleBackground.stopRippleAnimation();
 			Log.i(LOG_TAG, "destroy");
+
+
+
+
+	}
+
+
+
+
+
+
+
+
+
+	private void promptSpeechInput() {
+		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+				RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+		intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+				getString(R.string.speech_prompt));
+		try {
+			startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
+		} catch (ActivityNotFoundException a) {
+			Toast.makeText(getApplicationContext(),
+					getString(R.string.speech_not_supported),
+					Toast.LENGTH_SHORT).show();
 		}
-
-
-
 	}
 
+	/**
+	 * Receiving speech input
+	 * */
 	@Override
-	public void onBeginningOfSpeech() {
-		Log.i(LOG_TAG, "onBeginningOfSpeech");
-		//progressBar.setIndeterminate(false);
-		//progressBar.setMax(10);
-	}
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 
-	@Override
-	public void onBufferReceived(byte[] buffer) {
-		Log.i(LOG_TAG, "onBufferReceived: " + buffer);
-	}
+		switch (requestCode) {
+			case VOICE_RECOGNITION_REQUEST_CODE: {
+				rippleBackground.setVisibility(View.INVISIBLE);
+				rippleBackground.stopRippleAnimation();
 
-	@Override
-	public void onEndOfSpeech() {
-		Log.i(LOG_TAG, "onEndOfSpeech");
-		rippleBackground.setVisibility(View.INVISIBLE);
-		rippleBackground.stopRippleAnimation();
-		// progressBar.setIndeterminate(true);
-		// toggleButton.setChecked(false);
-	}
+				if (resultCode == RESULT_OK && null != data) {
 
-	@Override
-	public void onError(int errorCode) {
-		String errorMessage = getErrorText(errorCode);
-		Log.d(LOG_TAG, "FAILED " + errorMessage);
-		rippleBackground.setVisibility(View.INVISIBLE);
-		rippleBackground.stopRippleAnimation();
-		speech.stopListening();
-		// returnedText.setText(errorMessage);
-		// toggleButton.setChecked(false);
-	}
+					ArrayList<String> result = data
+							.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+					///start receiver
+					String resultText = result.get(0);
 
-	@Override
-	public void onEvent(int arg0, Bundle arg1) {
-		Log.i(LOG_TAG, "onEvent");
-	}
+					rippleBackground.setVisibility(View.INVISIBLE);
+					rippleBackground.stopRippleAnimation();
 
-	@Override
-	public void onPartialResults(Bundle arg0) {
-		Log.i(LOG_TAG, "onPartialResults");
-		rippleBackground.setVisibility(View.INVISIBLE);
-		rippleBackground.stopRippleAnimation();
-		speech.stopListening();
-	}
+					if(resultText.equalsIgnoreCase("music")|| resultText.equalsIgnoreCase("music player"))
+					{
+						//Toast.makeText(Vtt.this, matches.get(0), Toast.LENGTH_SHORT).show();
+						//Intent musicp = new Intent("android.intent.action.MUSIC_PLAYER");
+						//finish();
+						Intent musicp = new Intent(getApplicationContext(),MusicActivity.class);
+						startActivity(musicp);
 
-	@Override
-	public void onReadyForSpeech(Bundle arg0) {
-		Log.i(LOG_TAG, "onReadyForSpeech");
-	}
+					}
 
-	@Override
-	public void onResults(Bundle results) {
-		Log.i(LOG_TAG, "onResults");
-		ArrayList<String> matches = results
-				.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-		String resultText = matches.get(0);
-//		for (String result : matches)
-//			text += result + "\n";
-//		Log.v(LOG_TAG, text);
-		rippleBackground.setVisibility(View.INVISIBLE);
-		rippleBackground.stopRippleAnimation();
+					else if(resultText.startsWith("call"))
+					{//int index=aasd.indexOf("call");
+						Pattern p = Pattern.compile("(?<=\\bcall\\s)(\\w+)");
+						Matcher m = p.matcher(resultText);
+						while (m.find())
+						{
+							System.out.println(m.group(1));
 
-		if(resultText.equalsIgnoreCase("music")|| resultText.equalsIgnoreCase("music player"))
-		{
-			//Toast.makeText(Vtt.this, matches.get(0), Toast.LENGTH_SHORT).show();
-			//Intent musicp = new Intent("android.intent.action.MUSIC_PLAYER");
-			//finish();
-			Intent musicp = new Intent(getApplicationContext(),MusicActivity.class);
-			startActivity(musicp);
+						}
+						if(resultText.length()>4)
+						{String qwe= resultText.substring(5);
+							Toast.makeText(this, qwe, Toast.LENGTH_LONG).show();
+						}
+						else
+						{ Toast.makeText(this,"say the name", Toast.LENGTH_LONG).show();}
+					}
+					else if(resultText.equalsIgnoreCase("contact")|| resultText.equalsIgnoreCase("contacts"))
+					{
+						//finish();
+						Intent contactss = new Intent(getApplicationContext(),ContactActivity.class);
+						startActivity(contactss);
+					}
 
-		}
+					else if(resultText.equalsIgnoreCase("diary")||resultText.equalsIgnoreCase("diary"))
+					{
+						//finish();
+						Intent contactss = new Intent(getApplicationContext(),DiaryActivity.class);
+						startActivity(contactss);
+					}
 
-		else if(resultText.startsWith("call"))
-		{//int index=aasd.indexOf("call");
-			Pattern p = Pattern.compile("(?<=\\bcall\\s)(\\w+)");
-			Matcher m = p.matcher(resultText);
-			while (m.find())
-			{
-				System.out.println(m.group(1));
+					else if(resultText.equalsIgnoreCase("quit")|| resultText.equalsIgnoreCase("exit"))
+					{
+						finish();
+						finish();
+					}
+					else if(resultText.equalsIgnoreCase("hi")|| resultText.equalsIgnoreCase("hello"))
+					{
 
+
+						t1.speak("Hi, Iam VICKI, your personal assistant", TextToSpeech.QUEUE_FLUSH, null);
+						viciesponses.add("Hi, Iam VICKI, your personal assistant");
+						adapter.notifyDataSetChanged();
+
+
+
+					}
+
+					else if(resultText.equalsIgnoreCase("silent")|| resultText.equalsIgnoreCase("silence"))
+					{
+						//finish();
+
+						audMangr= (AudioManager) getBaseContext().getSystemService(Context.AUDIO_SERVICE);
+
+						//For Normal mode
+						//  audMangr.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+
+						//For Silent mode
+						//  audMangr.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+
+						//For Vibrate mode
+						audMangr.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+					}
+					else if(resultText.equalsIgnoreCase("normal")|| resultText.equalsIgnoreCase("normal mode"))
+					{
+						//finish();
+						audMangr= (AudioManager) getBaseContext().getSystemService(Context.AUDIO_SERVICE);
+
+						//For Normal mode
+						audMangr.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+					}
+
+					else
+					{
+						viciesponses.add("no such command, please try again");
+						adapter.notifyDataSetChanged();
+						t1.speak("no such command, please try again", TextToSpeech.QUEUE_FLUSH, null);
+						//Toast.makeText(this, "no such command", Toast.LENGTH_LONG).show();
+						//finish();
+
+					}
+				}
+				break;
 			}
-			if(resultText.length()>4)
-			{String qwe= resultText.substring(5);
-				Toast.makeText(this, qwe, Toast.LENGTH_LONG).show();
-			}
-			else
-			{ Toast.makeText(this,"say the name", Toast.LENGTH_LONG).show();}
-		}
-		else if(resultText.equalsIgnoreCase("contact")|| resultText.equalsIgnoreCase("contacts"))
-		{
-			//finish();
-			Intent contactss = new Intent(getApplicationContext(),ContactActivity.class);
-			startActivity(contactss);
-		}
-
-		else if(resultText.equalsIgnoreCase("diary")||resultText.equalsIgnoreCase("diary"))
-		{
-			//finish();
-			Intent contactss = new Intent(getApplicationContext(),DiaryActivity.class);
-			startActivity(contactss);
-		}
-
-		else if(resultText.equalsIgnoreCase("quit")|| resultText.equalsIgnoreCase("exit"))
-		{
-			finish();
-			finish();
-		}
-		else if(resultText.equalsIgnoreCase("hi")|| resultText.equalsIgnoreCase("hello"))
-		{
-
-
-			t1.speak("Hi, Iam VICKI, your personal assistant", TextToSpeech.QUEUE_FLUSH, null);
-			viciesponses.add("Hi, Iam VICKI, your personal assistant");
-			adapter.notifyDataSetChanged();
-
-
 
 		}
-
-		else if(resultText.equalsIgnoreCase("silent")|| resultText.equalsIgnoreCase("silence"))
-		{
-			//finish();
-
-			audMangr= (AudioManager) getBaseContext().getSystemService(Context.AUDIO_SERVICE);
-
-			//For Normal mode
-			//  audMangr.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-
-			//For Silent mode
-			//  audMangr.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-
-			//For Vibrate mode
-			audMangr.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
-		}
-		else if(resultText.equalsIgnoreCase("normal")|| resultText.equalsIgnoreCase("normal mode"))
-		{
-			//finish();
-			audMangr= (AudioManager) getBaseContext().getSystemService(Context.AUDIO_SERVICE);
-
-			//For Normal mode
-			audMangr.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-		}
-
-		else
-		{
-			viciesponses.add("no such command, please try again");
-			adapter.notifyDataSetChanged();
-			t1.speak("no such command, please try again", TextToSpeech.QUEUE_FLUSH, null);
-			//Toast.makeText(this, "no such command", Toast.LENGTH_LONG).show();
-			//finish();
-
-		}
-		//speech.stopListening();
-		//returnedText.setText(text);
 	}
 
-	@Override
-	public void onRmsChanged(float rmsdB) {
-		Log.v(LOG_TAG, "onRmsChanged: " + rmsdB);
-		//mVisualizerView.updateVisualizer(ByteBuffer.allocate(4).putFloat(rmsdB).array());
-		//progressBar.setProgress((int) rmsdB);
-	}
 
-	public static String getErrorText(int errorCode) {
-		String message;
-		switch (errorCode) {
-			case SpeechRecognizer.ERROR_AUDIO:
-				message = "Audio recording error";
-				break;
-			case SpeechRecognizer.ERROR_CLIENT:
-				message = "Client side error";
-				break;
-			case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
-				message = "Insufficient permissions";
-				break;
-			case SpeechRecognizer.ERROR_NETWORK:
-				message = "Network error";
-				break;
-			case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
-				message = "Network timeout";
-				break;
-			case SpeechRecognizer.ERROR_NO_MATCH:
-				message = "No match";
-				break;
-			case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
-				message = "RecognitionService busy";
-				break;
-			case SpeechRecognizer.ERROR_SERVER:
-				message = "error from server";
-				break;
-			case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
-				message = "No speech input";
-				break;
-			default:
-				message = "Didn't understand, please try again.";
-				break;
-		}
-
-		return message;
-	}
 
 	public void open(){
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -348,19 +282,7 @@ public class HomeScreen extends Activity implements GetTextFromVoiceCallback,Rec
 				"varsha\n" +
 				"amruta");
 
-//		alertDialogBuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-//			@Override
-//			public void onClick(DialogInterface arg0, int arg1) {
-//				Toast.makeText(HomeScreen.this,"You clicked yes button",Toast.LENGTH_LONG).show();
-//			}
-//		});
-//
-//		alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
-//			@Override
-//			public void onClick(DialogInterface dialog, int which) {
-//				finish();
-//			}
-//		});
+
 
 		AlertDialog alertDialog = alertDialogBuilder.create();
 		alertDialog.show();

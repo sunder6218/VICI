@@ -80,7 +80,7 @@ public class HomeScreen_old extends Activity implements GetTextFromVoiceCallback
 
 
 
-			rippleBackground=(RippleBackground)findViewById(R.id.content);
+			rippleBackground= new RippleBackground(this);
 			rippleBackground.setVisibility(View.INVISIBLE);
 			btn.setOnClickListener(new OnClickListener() {
 				@Override

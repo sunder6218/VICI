@@ -55,7 +55,7 @@ public class VoiceRecognizer extends Activity implements
 
 
 
-        rippleBackground=(RippleBackground)findViewById(R.id.content);
+        rippleBackground=new RippleBackground(this);
         rippleBackground.setVisibility(View.INVISIBLE);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

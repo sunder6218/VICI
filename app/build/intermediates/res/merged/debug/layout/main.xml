@@ -51,27 +51,29 @@
         android:id="@+id/list1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true" />
 
-    <com.skyfishjy.library.RippleBackground
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/content"
+    <!--<com.skyfishjy.library.RippleBackground-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/content"-->
 
-        app:rb_color="#0099CC"
-        app:rb_radius="32dp"
-        app:rb_rippleAmount="4"
-        app:rb_duration="3000"
-        app:rb_scale="6">
-        <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_centerInParent="true"
-            android:id="@+id/centerImage"
-            android:src="@drawable/abc_ic_mic"/>
-    </com.skyfishjy.library.RippleBackground>
+        <!--app:rb_color="#0099CC"-->
+        <!--app:rb_radius="32dp"-->
+        <!--app:rb_rippleAmount="4"-->
+        <!--app:rb_duration="3000"-->
+        <!--app:rb_scale="6"-->
+        <!--android:layout_alignParentBottom="true">-->
+        <!--<ImageView-->
+            <!--android:layout_width="64dp"-->
+            <!--android:layout_height="64dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:id="@+id/centerImage"-->
+            <!--android:src="@drawable/abc_ic_mic"/>-->
+    <!--</com.skyfishjy.library.RippleBackground>-->
 </RelativeLayout>
 
 

@@ -3,6 +3,7 @@ package vici.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,13 @@ import com.ui.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import vici.ui.model.Commands;
+
 public class ResponsesAdapter extends BaseAdapter {
           
          /*********** Declare Used Variables *********/
          private Context mContext;
-         private ArrayList<String> data;
+         private ArrayList<Commands> data;
          private static LayoutInflater inflater=null;
 
          public Resources res;
@@ -28,29 +31,32 @@ public class ResponsesAdapter extends BaseAdapter {
           
          /*************  CustomAdapter Constructor *****************/
          public ResponsesAdapter(ArrayList d,Context mContext) {
-              
+              super();
                 /********** Take passed values **********/
              this.mContext=mContext;
                  this.data=d;
 
                  /***********  Layout inflator to call external xml layout () ***********/
-                  inflater = ( LayoutInflater )mContext.
+                  inflater = ( LayoutInflater )this.mContext.
                                               getSystemService(Context.LAYOUT_INFLATER_SERVICE);
               
          }
       
          /******** What is the size of Passed Arraylist Size ************/
+         @Override
          public int getCount() {
               
              if(data.size()<=0)
                  return 1;
              return data.size();
          }
-      
-         public String getItem(int position) {
+
+    @Override
+         public Commands getItem(int position) {
              return data.get(position);
          }
-      
+
+    @Override
          public long getItemId(int position) {
              return position;
          }
@@ -64,6 +70,7 @@ public class ResponsesAdapter extends BaseAdapter {
          }
       
          /****** Depends upon data size called for each row , Create each ListView row *****/
+         @Override
          public View getView(int position, View convertView, ViewGroup parent) {
               
              View vi = convertView;
@@ -85,7 +92,8 @@ public class ResponsesAdapter extends BaseAdapter {
              }
              else 
                  holder=(ViewHolder)vi.getTag();
-              
+
+
              if(data.size()<=0)
              {
                  holder.text.setText("");
@@ -93,10 +101,10 @@ public class ResponsesAdapter extends BaseAdapter {
              }
              else
              {
-                 String tempValues=null;
-                 tempValues = data.get( position );
-                  holder.text.setText(tempValues);
-
+                 String tempValues;
+                 tempValues = data.get( position ).text;
+                  holder.text.setText(tempValues+"");
+                 holder.text.setGravity(data.get(position).direction ? Gravity.RIGHT : Gravity.LEFT);
              }
              return vi;
          }

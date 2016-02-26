@@ -30,19 +30,19 @@ import java.util.regex.Pattern;
 
 import vici.adapters.ResponsesAdapter;
 import vici.interfaces.GetTextFromVoiceCallback;
-
+import vici.ui.model.Commands;
 
 
 public class HomeScreen extends Activity implements GetTextFromVoiceCallback {
 
 
 	private static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
-	private RippleBackground rippleBackground;
+
 	private String LOG_TAG= HomeScreen.class.getSimpleName();
 	private ImageView btn,instructions;
 	private TextToSpeech t1;
-	private ArrayList<String> viciesponses;
-	private ListView listView;
+	private ArrayList<Commands> viciesponses= new ArrayList<>();
+	private ListView listVieW;
 	private ResponsesAdapter adapter;
 	AudioManager audMangr;
 
@@ -56,11 +56,12 @@ public class HomeScreen extends Activity implements GetTextFromVoiceCallback {
 	        setContentView(R.layout.main);
 
 			btn= (ImageView)findViewById(R.id.talk);
-			listView=(ListView)findViewById(R.id.list1);
+			listVieW=(ListView)findViewById(R.id.list1);
 			instructions=(ImageView)findViewById(R.id.instructions);
 
-			viciesponses= new ArrayList<>();
+
 			adapter=new ResponsesAdapter( viciesponses, getApplicationContext() );
+			listVieW.setAdapter(adapter);
 
 			t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
 				@Override
@@ -74,13 +75,11 @@ public class HomeScreen extends Activity implements GetTextFromVoiceCallback {
 
 
 
-			rippleBackground=(RippleBackground)findViewById(R.id.content);
-			rippleBackground.setVisibility(View.INVISIBLE);
+
 			btn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					rippleBackground.setVisibility(View.VISIBLE);
-					rippleBackground.startRippleAnimation();
+
 					promptSpeechInput();
 
 				}
@@ -120,8 +119,7 @@ public class HomeScreen extends Activity implements GetTextFromVoiceCallback {
 	protected void onPause() {
 		super.onPause();
 
-			rippleBackground.setVisibility(View.INVISIBLE);
-			rippleBackground.stopRippleAnimation();
+
 			Log.i(LOG_TAG, "destroy");
 
 
@@ -162,8 +160,8 @@ public class HomeScreen extends Activity implements GetTextFromVoiceCallback {
 
 		switch (requestCode) {
 			case VOICE_RECOGNITION_REQUEST_CODE: {
-				rippleBackground.setVisibility(View.INVISIBLE);
-				rippleBackground.stopRippleAnimation();
+
+
 
 				if (resultCode == RESULT_OK && null != data) {
 
@@ -171,9 +169,9 @@ public class HomeScreen extends Activity implements GetTextFromVoiceCallback {
 							.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 					///start receiver
 					String resultText = result.get(0);
+					viciesponses.add(new Commands(true, resultText + ""));
+					adapter.notifyDataSetChanged();
 
-					rippleBackground.setVisibility(View.INVISIBLE);
-					rippleBackground.stopRippleAnimation();
 
 					if(resultText.equalsIgnoreCase("music")|| resultText.equalsIgnoreCase("music player"))
 					{
@@ -225,7 +223,7 @@ public class HomeScreen extends Activity implements GetTextFromVoiceCallback {
 
 
 						t1.speak("Hi, Iam VICKI, your personal assistant", TextToSpeech.QUEUE_FLUSH, null);
-						viciesponses.add("Hi, Iam VICKI, your personal assistant");
+						viciesponses.add(new Commands(false,"Hi, Iam VICI, your personal assistant"));
 						adapter.notifyDataSetChanged();
 
 
@@ -255,10 +253,17 @@ public class HomeScreen extends Activity implements GetTextFromVoiceCallback {
 						//For Normal mode
 						audMangr.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 					}
+					else if(resultText.equalsIgnoreCase("help") || resultText.contains("command"))
+					{
+
+						viciesponses.add(new Commands(false,"Contacts\n\nMusic\n\nDiary\n\nSilent\n\nNormal\n\n"));
+						adapter.notifyDataSetChanged();
+						t1.speak("use one of the following commands", TextToSpeech.QUEUE_FLUSH, null);
+					}
 
 					else
 					{
-						viciesponses.add("no such command, please try again");
+						viciesponses.add(new Commands(false,"no such command, please try again"));
 						adapter.notifyDataSetChanged();
 						t1.speak("no such command, please try again", TextToSpeech.QUEUE_FLUSH, null);
 						//Toast.makeText(this, "no such command", Toast.LENGTH_LONG).show();

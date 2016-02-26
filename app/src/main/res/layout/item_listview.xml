@@ -10,5 +10,8 @@
         android:textColor="#fff"
         android:padding="5dp"
         android:id="@+id/response"
+        android:layout_gravity="right"
+        android:gravity="right"
+        android:layout_margin="14dp"
         android:text="hello"/>
 </LinearLayout>

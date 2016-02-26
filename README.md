@@ -6,4 +6,9 @@ is an Virtual Assistant for your android pphones which carries some basic handsf
 check the app in action
 https://play.google.com/store/apps/details?id=in.eyvai.vici
 
+# Instructions
+
+for commands
+tap on the mic and say "help"
+
 this project is strictly for educational purpose only!!
